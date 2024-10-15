@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Ce fichier fait partie d'un projet Lyssal.
+ *
+ * This file is part of a Lyssal project.
+ *
+ * @copyright Rémi Leclerc
+ * @author Rémi Leclerc
+ */
+
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Lyssal\DoctrineExtraBundle\Appellation\AppellationManager;
