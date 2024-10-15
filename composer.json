@@ -1,0 +1,29 @@
+{
+    "name": "lyssal/doctrine-extra-bundle",
+    "description": "Some functionalities to use and manage entities in Symfony.",
+	"license" : "MIT",
+    "keywords": ["doctrine", "entity", "entity-manager", "orm", "repository"],
+    "type": "symfony-bundle",
+    "authors": [
+        {
+            "name": "Rémi Leclerc",
+            "homepage": "http://www.lyssal.com/"
+        }
+    ],
+    "require": {
+        "php": "^8",
+        "lyssal/lib-php": "^0.3.1",
+        "symfony/dependency-injection": "^7",
+        "symfony/http-kernel": "^7",
+        "symfony/routing": "^7",
+        "doctrine/doctrine-bundle": "^2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lyssal\\DoctrineExtraBundle\\": "src/"
+        }
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.64"
+    }
+}

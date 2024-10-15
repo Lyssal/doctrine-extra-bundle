@@ -1,0 +1,21 @@
+{% if breadcrumbs|length > 1 -%}
+    <nav role="navigation">
+        <ul class="breadcrumbs">
+            {%- for breadcrumb in breadcrumbs -%}
+                {%- set has_link = breadcrumb.link is not null -%}
+
+                <li{% if not has_link and not loop.last %} class="disabled"{% endif %}>
+                    {%- if has_link and not loop.last -%}
+                        <a href="{{ breadcrumb.link }}">
+                    {%- endif -%}
+
+                    {{ breadcrumb.label|raw }}
+
+                    {%- if has_link and not loop.last -%}
+                        </a>
+                    {%- endif -%}
+                </li>
+            {%- endfor -%}
+        </ul>
+    </nav>
+{%- endif -%}

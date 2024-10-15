@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+echo -e "${CLREOL}\n \\\\\\ Start \e[1mPHP CS Fixer\e[0m\n"
+
+PHP_CS_FIXER="vendor/friendsofphp/php-cs-fixer/php-cs-fixer"
+PHP_CS_CONFIG=".php-cs-fixer.dist.php"
+CHANGED_FILES=$(git diff --name-only --diff-filter=ACM -- '*.php')
+PHP_CS_COMMAND="$PHP_CS_FIXER fix --dry-run --quiet --config $PHP_CS_CONFIG $CHANGED_FILES"
+
+if [ -n "$CHANGED_FILES" ]; then
+    $PHP_CS_FIXER fix --dry-run --quiet --config $PHP_CS_CONFIG $CHANGED_FILES
+    if [ $? -ne 0 ]; then
+        $PHP_CS_FIXER fix --quiet --config $PHP_CS_CONFIG $CHANGED_FILES
+        echo -e "\e[1;41m\n${CLREOL}\n PHP CS Fixer has encountered errors.\n Please run 'git diff' to see your errors and 'git add' them before 'git commit'.\n\e[0m\n"
+        exit 2
+    fi
+fi
+
+echo -e "\e[30;42m\n${CLREOL}\n [OK] PHP CS Fixer terminated.\n\e[0m\n"
