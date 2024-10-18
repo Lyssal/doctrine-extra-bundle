@@ -11,6 +11,7 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Lyssal\DoctrineExtraBundle\Administrator\EntityAdministratorManager;
 use Lyssal\DoctrineExtraBundle\Appellation\AppellationManager;
 use Lyssal\DoctrineExtraBundle\Breadcrumb\BreadcrumbGenerator;
 use Lyssal\DoctrineExtraBundle\Decorator\DecoratorManager;
@@ -26,7 +27,7 @@ return static function (ContainerConfigurator $container): void {
             ->autoconfigure()
             ->private()
         ->load('Lyssal\\DoctrineExtraBundle\\', '../../')
-        ->exclude('../../{DependencyInjection,Entity,Exception,QueryBuilder,Resources}')
+        ->exclude('../../{Administrator/EntityAdministrator.php,DependencyInjection,Entity,Exception,QueryBuilder,Resources}')
     ;
 
     $services
@@ -48,6 +49,13 @@ return static function (ContainerConfigurator $container): void {
             ->public()
             ->call('addEntityRouters', [tagged_iterator('lyssal.entity_router')])
         ->alias(EntityRouterManager::class, 'lyssal.entity_router')
+    ;
+
+    $services
+        ->set('lyssal.entity_administrator', EntityAdministratorManager::class)
+            ->public()
+            ->call('addEntityAdministrators', [tagged_iterator('lyssal.entity_administrator')])
+        ->alias(EntityAdministratorManager::class, 'lyssal.entity_administrator')
     ;
 
     $services

@@ -12,11 +12,13 @@
 namespace Lyssal\DoctrineExtraBundle\Administrator;
 
 use Lyssal\DoctrineExtraBundle\Repository\EntityRepository;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 /**
  * An administrator to manage Doctrine entities.
  * The repository entity has to extends the LyssalDoctrineOrm entity repository.
  */
+#[AutoconfigureTag('lyssal.entity_administrator')]
 interface EntityAdministratorInterface
 {
     /**
