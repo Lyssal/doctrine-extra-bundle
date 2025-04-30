@@ -485,7 +485,23 @@ trait QueryBuilderTrait
      */
     protected function entityHasProperty($property): bool
     {
-        return false === \strpos($property, '.') && \property_exists($this->getClassName(), $property);
+        if (false !== \strpos($property, '.')) {
+            return false;
+        }
+
+        if (\property_exists($this->getClassName(), $property)) {
+            return true;
+        }
+
+        $class = $this->getClassName();
+
+        while ($class = \get_parent_class($class)) {
+            if (\property_exists($class, $property)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
